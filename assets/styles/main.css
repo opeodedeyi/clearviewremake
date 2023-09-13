@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,600;1,400;1,600&family=Questrial&display=swap');
+
+:root {
+    font-size: 16px;
+    --color-white: #ffffff;
+    --color-gray: #F2F4F6;
+    --color-gray-2: #F0F2F4;
+    --color-dark: #000000;
+    --color-danger: #E35326;
+    --color-danger-hover: #E07B5C;
+    --color-company: #002047;
+    --color-company-dark: #001A3A;
+    --rgba-backdrop: 0, 0, 0;
+}
+
+html {
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: 'Libre Franklin', sans-serif;
+    margin: 0;
+    background-color: var(--color-gray);
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--color-company);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--color-gray);
+}
+
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.plr16 { 
+    padding: 0 16px;
+}
+
+.plr-header { 
+    padding: 0 25px;
+}
+
+.plr-footer-bottom-header {
+    padding: 0 25px;
+}
+
+.pl16 { 
+    padding-left: 16px;
+}
+
+.pl25 { 
+    padding-left: 25px;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.mr-15 {
+    margin-right: 15px;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mb-25 {
+    margin-bottom: 25px;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+.mb-35 {
+    margin-bottom: 35px;
+}
+
+.mb-40 {
+    margin-bottom: 40px;
+}
+
+.mb-45 {
+    margin-bottom: 40px;
+}
+
+.mb-50 {
+    margin-bottom: 50px;
+}
