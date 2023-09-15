@@ -81,7 +81,7 @@ export default {
     max-width: 420px;
     padding: 0 30px;
     background-color: var(--color-company);
-    background-image: url('~assets/svg/homepage-patterns-mobile.svg');
+    background-image: url('/svg/homepage-patterns-mobile.svg');
     color: var(--color-white);
     transition: right .3s;
     height: 100vh;

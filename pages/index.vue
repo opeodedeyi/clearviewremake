@@ -13,7 +13,7 @@
         const response = await client.getEntries({
             content_type: 'caseStudies',
             order: '-sys.createdAt',
-            limit,
+            limit: 6,
             skip
         });
 
