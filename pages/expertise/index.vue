@@ -20,12 +20,12 @@
     });
 
     const weSupportWith = ref([
-        {id: 1, image: 'aIIcon.svg', title: 'Audience Insight', content:"Want to better understand a community or a group of people you do not know too well? We can help you do just that!"},
-        {id: 5, image: 'm&eIcon.svg', title: 'Monitoring & Evaluation', content:"You ever wondered how much of an impact your service / programme / intervention is making on your intended beneficiaries? No need to look further, we can support you to figure out this and even more."},
-        {id: 3, image: 'c&mIcon.svg', title: 'Communications & Marketing', content:"We have all seen how costly it can be for brands who get communication or campaigns wrong, so we understand the importance of communicating effectively with audiences. We can share our expertise with you and culturally-sensitive insights to execute bold campaigns that cut through and land well with people from the communities we specialise in."},
-        {id: 2, image: 'aIcon.svg', title: 'Advisory', content:"If you are seeking a critical friend to support you in developing your current and future strategies then you’ve found the right agency."},
-        {id: 4, image: 'lPIcon.svg', title: 'Learning Partner', content:"Collaboration is a key part of our organisation’s success and we are committed to working in partnership with funders and influential organisations to solve pressing issues in our society."},
-        {id: 6, image: 'sPIcon.svg', title: 'Strategic Planning', content:"Crush your business goals with our actionable strategies based on both evidence-based and culturally-relevant insights (plus a sprinkle of creative imagination)"},
+        {id: 1, image: '/svg/aIIcon.svg', title: 'Audience Insight', content:"Want to better understand a community or a group of people you do not know too well? We can help you do just that!"},
+        {id: 5, image: '/svg/m&eIcon.svg', title: 'Monitoring & Evaluation', content:"You ever wondered how much of an impact your service / programme / intervention is making on your intended beneficiaries? No need to look further, we can support you to figure out this and even more."},
+        {id: 3, image: '/svg/c&mIcon.svg', title: 'Communications & Marketing', content:"We have all seen how costly it can be for brands who get communication or campaigns wrong, so we understand the importance of communicating effectively with audiences. We can share our expertise with you and culturally-sensitive insights to execute bold campaigns that cut through and land well with people from the communities we specialise in."},
+        {id: 2, image: '/svg/aIcon.svg', title: 'Advisory', content:"If you are seeking a critical friend to support you in developing your current and future strategies then you’ve found the right agency."},
+        {id: 4, image: '/svg/lPIcon.svg', title: 'Learning Partner', content:"Collaboration is a key part of our organisation’s success and we are committed to working in partnership with funders and influential organisations to solve pressing issues in our society."},
+        {id: 6, image: '/svg/sPIcon.svg', title: 'Strategic Planning', content:"Crush your business goals with our actionable strategies based on both evidence-based and culturally-relevant insights (plus a sprinkle of creative imagination)"},
     ]);
 
     const weknow = ([
@@ -61,10 +61,6 @@
         });
         team.value = mappedTeam;
     }
-
-    const getAssetPath = (image) => {
-        return `/assets/svg/${image}`;
-    };
 
     function showMember(ind) {
         teamMember.value = ind;
@@ -111,7 +107,7 @@
             <p class="expertise-support-title">We can support you with</p>
             <div class="expertise-support-cards">
                 <div class="expertise-support-card" v-for="(result, index) in weSupportWith" :key="index">
-                    <img :src="getAssetPath(result.image)" alt="">
+                    <img :src="result.image" alt="">
                     
                     <p class="support-card-title">{{ result.title }}</p>
                     <p class="support-card-content">{{ result.content }}</p>
