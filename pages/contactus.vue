@@ -142,7 +142,7 @@
 }
 
 .contact-image {
-    background-image: url('images/contactus.jpeg');
+    background-image: url('/images/contactus.jpeg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

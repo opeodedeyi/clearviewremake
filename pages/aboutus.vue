@@ -91,7 +91,7 @@ useHead({
 }
 
 .aboutus-image {
-    background-image: url('images/aboutus.png');
+    background-image: url('/images/aboutus.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -182,7 +182,7 @@ useHead({
 .aboutus-statement-image {
     height: cover;
     width: 40%;
-    background-image: url('images/about.png');
+    background-image: url('/images/about.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -291,18 +291,18 @@ useHead({
     .aboutus-statement-image {
         width: 100%;
         height: 352px;
-        background-image: url('images/about-mobile.png');
+        background-image: url('/images/about-mobile.png');
     }
 }
 
 @media only screen and (max-width: 600px) {
     .aboutus-image {
         height: 381px;
-        background-image: url('images/aboutus-mobile.png');
+        background-image: url('/images/aboutus-mobile.png');
     }
 
     .aboutus-statement-image {
-        background-image: url('images/about-mobile.png');
+        background-image: url('/images/about-mobile.png');
     }
 }
 

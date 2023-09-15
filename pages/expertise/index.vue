@@ -177,7 +177,7 @@
 }
 
 .expertise-image {
-    background-image: url('images/expertise.png');
+    background-image: url('/images/expertise.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

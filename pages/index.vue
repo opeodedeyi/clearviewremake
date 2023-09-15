@@ -340,7 +340,7 @@
   flex-direction: row;
   flex-wrap: nowrap;
   background-color: var(--color-company-dark);
-  background-image: url('assets/svg/homepage-patterns.svg');
+  background-image: url('/svg/homepage-patterns.svg');
 }
 
 .homepage-about-design {
@@ -437,7 +437,7 @@
 .mission-photo {
   width: 50%;
   height: cover;
-  background-image: url('images/homepage1.jpg');
+  background-image: url('/images/homepage1.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -684,7 +684,7 @@
 
 .testimony-quote {
   position: absolute;
-  background: url('assets/svg/quote.svg');
+  background: url('/svg/quote.svg');
   height: 67px;
   width: 67px;
   background-position: center;
@@ -899,7 +899,7 @@
 .homepage-close-image {
     height: cover;
     width: 45%;
-    background-image: url('images/homepage2.jpeg');
+    background-image: url('/images/homepage2.jpeg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
