@@ -8,10 +8,12 @@ definePageMeta({
 
 <template>
     <div class="error-page">
-        <div class="error-page-sign"><img src="~/assets/svg/errorsign.svg" alt=""></div>
-        <h1 class="error-page-code">{{ error.statusCode }}</h1>
-        <p class="error-page-explain" v-if="error.statusCode === 404">The page you are looking for can’t be found</p>
-        <p class="error-page-explain" v-else>An error occurred</p>
+        <div class="error-page-sign"><img src="/svg/errorsign.svg" alt=""></div>
+        <!-- <h1 class="error-page-code">{{ error.statusCode }}</h1> -->
+        <h1 class="error-page-code">404</h1>
+        <!-- <p class="error-page-explain" v-if="error.statusCode === 404">The page you are looking for can’t be found</p> -->
+        <p class="error-page-explain">The page you are looking for can’t be found</p>
+        <!-- <p class="error-page-explain" v-else>An error occurred</p> -->
         <UtilityButton type="link" to="/" size="medium">Back to home</UtilityButton>
     </div>
 </template>
