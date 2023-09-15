@@ -9,7 +9,29 @@
         accessToken: runtimeConfig.public.theAccessToken,
     });
 
-    const caseStudies = ref(null);
+    const fetchData = async () => {
+        const response = await client.getEntries({
+            content_type: 'caseStudies',
+            order: '-sys.createdAt',
+            limit,
+            skip
+        });
+
+        console.log(response);
+
+        return response.items.map((item) => {
+            const { id, createdAt } = item.sys;
+            const { slug, title, description } = item.fields;
+            const featuredImage = item.fields.featuredImage.fields.file.url;
+            return {
+                id, slug, title, description, featuredImage, createdAt
+            };
+        });
+    };
+
+    const { data: caseStudies, pending, error, refresh } = await useAsyncData('caseStudies', fetchData);
+
+    // const caseStudies = ref(null);
     const caseScroll = ref(null)
     const testimonyNo = ref(1);
 
@@ -88,9 +110,9 @@
     const closedClients = ref(true);
     const closedInsights = ref(true);
 
-    onMounted(() => {
-        getCaseStudies();
-    });
+    // onMounted(() => {
+    //     getCaseStudies();
+    // });
 
     function aboutUs() {
         router.push('/aboutus');
@@ -1127,7 +1149,7 @@
   .homepage-close-image {
     width: 100%;
     height: 342px;
-    background-image: url('images/homepage2-mobile.jpeg');
+    background-image: url('/images/homepage2-mobile.jpeg');
   }
 }
 
