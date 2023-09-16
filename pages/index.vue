@@ -9,29 +9,29 @@
         accessToken: runtimeConfig.public.theAccessToken,
     });
 
-    const fetchData = async () => {
-        const response = await client.getEntries({
-            content_type: 'caseStudies',
-            order: '-sys.createdAt',
-            limit: 6,
-            skip
-        });
+    // const fetchData = async () => {
+    //     const response = await client.getEntries({
+    //         content_type: 'caseStudies',
+    //         order: '-sys.createdAt',
+    //         limit: 6,
+    //         skip
+    //     });
 
-        console.log(response);
+    //     console.log(response);
 
-        return response.items.map((item) => {
-            const { id, createdAt } = item.sys;
-            const { slug, title, description } = item.fields;
-            const featuredImage = item.fields.featuredImage.fields.file.url;
-            return {
-                id, slug, title, description, featuredImage, createdAt
-            };
-        });
-    };
+    //     return response.items.map((item) => {
+    //         const { id, createdAt } = item.sys;
+    //         const { slug, title, description } = item.fields;
+    //         const featuredImage = item.fields.featuredImage.fields.file.url;
+    //         return {
+    //             id, slug, title, description, featuredImage, createdAt
+    //         };
+    //     });
+    // };
 
-    const { data: caseStudies, pending, error, refresh } = await useAsyncData('caseStudies', fetchData);
+    // const { data: caseStudies, pending, error, refresh } = await useAsyncData('caseStudies', fetchData);
 
-    // const caseStudies = ref(null);
+    const caseStudies = ref(null);
     const caseScroll = ref(null)
     const testimonyNo = ref(1);
 
@@ -110,9 +110,9 @@
     const closedClients = ref(true);
     const closedInsights = ref(true);
 
-    // onMounted(() => {
-    //     getCaseStudies();
-    // });
+    onMounted(() => {
+        getCaseStudies();
+    });
 
     function aboutUs() {
         router.push('/aboutus');

@@ -34,22 +34,6 @@ const rejectAnalyticsCookies = () => {
     </div>
 </template>
 
-<!-- <script>
-export default {
-    methods: {
-        closePopup() {
-            this.$emit("close-popup");
-        },
-        acceptAnalyticsCookies() {
-            this.$emit("accept-analytics-cookie");
-        },
-        rejectAnalyticsCookies() {
-            this.$emit("reject-analytics-cookie");
-        }
-    }
-}
-</script> -->
-
 <style scoped>
 .cookie-popup-content {
     position: fixed;
