@@ -195,7 +195,7 @@
                 <div class="blog-titlee">{{blogDetails[0].title}}</div>
             </div>
             <div class="blog-main-image">
-                <img :src="blogDetails[0].featuredImage" alt="">
+                <NuxtImg :src="blogDetails[0].featuredImage" alt="" format="webp" sizes="sm:1000px md:1100px lg:1200px"/>
             </div>
             <div class="blog-main-content" v-html="blogDetails[0].details"></div>
             

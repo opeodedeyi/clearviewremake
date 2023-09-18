@@ -202,7 +202,7 @@
                 <div class="project-titlee">{{projectDetails[0].title}}</div>
             </div>
             <div class="project-main-image">
-                <img :src="projectDetails[0].featuredImage" alt="">
+                <NuxtImg :src="projectDetails[0].featuredImage" format="webp" alt="img" sizes="sm:1000px md:1100px lg:1200px"/>
             </div>
             <div class="project-main-content" v-html="projectDetails[0].details"></div>
  
