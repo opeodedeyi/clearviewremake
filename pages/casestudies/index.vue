@@ -1,12 +1,6 @@
 <script setup>
     import { ref, onMounted } from 'vue';
-    const runtimeConfig = useRuntimeConfig();
-    import { createClient } from 'contentful';
-
-    const client = createClient({
-        space: runtimeConfig.public.theSpaceId,
-        accessToken: runtimeConfig.public.theAccessToken,
-    });
+    const { $contentfulClient } = useNuxtApp();
 
     useHead({
         title: 'Case Studies / ClearView Research',
@@ -28,7 +22,7 @@
     async function getAllProjects(requestedLimit = limit.value, skip = 0) {
         loading.value = true;
 
-        const response = await client.getEntries({
+        const response = await $contentfulClient.getEntries({
             content_type: 'caseStudies',
             order: '-sys.createdAt',
             limit: requestedLimit,

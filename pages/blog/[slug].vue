@@ -2,18 +2,12 @@
     import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
     import { BLOCKS, INLINES } from "@contentful/rich-text-types";
     const route = useRoute()
-    const runtimeConfig = useRuntimeConfig();
-    import { createClient } from 'contentful';
+    const { $contentfulClient } = useNuxtApp();
 
     const mainPdf = ref(null);
     const moreblogs = ref(null);
     const limit = ref(2);
     const loading = ref(false);
-
-    const client = createClient({
-        space: runtimeConfig.public.theSpaceId,
-        accessToken: runtimeConfig.public.theAccessToken,
-    });
 
     function getCustomDate(passedDate) {
         const date = new Date(passedDate);
@@ -27,7 +21,7 @@
     }
 
     const fetchData = async () => {
-        const response = await client.getEntries({
+        const response = await $contentfulClient.getEntries({
             content_type: 'blog',
             'fields.slug': route.params.slug
         });
@@ -146,7 +140,7 @@
         loading.value = true;
         console.log(`slug - ${route.params.slug}`)
 
-        const response = await client.getEntries({
+        const response = await $contentfulClient.getEntries({
             content_type: 'blog',
             order: '-sys.createdAt',
             'fields.slug[nin]': route.params.slug,

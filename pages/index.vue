@@ -1,35 +1,7 @@
 <script setup>
     import { ref, onMounted } from 'vue';
     const router = useRouter();
-    const runtimeConfig = useRuntimeConfig();
-    import { createClient } from 'contentful';
-
-    const client = createClient({
-        space: runtimeConfig.public.theSpaceId,
-        accessToken: runtimeConfig.public.theAccessToken,
-    });
-
-    // const fetchData = async () => {
-    //     const response = await client.getEntries({
-    //         content_type: 'caseStudies',
-    //         order: '-sys.createdAt',
-    //         limit: 6,
-    //         skip
-    //     });
-
-    //     console.log(response);
-
-    //     return response.items.map((item) => {
-    //         const { id, createdAt } = item.sys;
-    //         const { slug, title, description } = item.fields;
-    //         const featuredImage = item.fields.featuredImage.fields.file.url;
-    //         return {
-    //             id, slug, title, description, featuredImage, createdAt
-    //         };
-    //     });
-    // };
-
-    // const { data: caseStudies, pending, error, refresh } = await useAsyncData('caseStudies', fetchData);
+    const { $contentfulClient } = useNuxtApp();
 
     const caseStudies = ref(null);
     const caseScroll = ref(null)
@@ -119,7 +91,7 @@
     }
 
     async function getCaseStudies(limit = 6, skip = 0) {
-        const response = await client.getEntries({
+        const response = await $contentfulClient.getEntries({
             content_type: 'caseStudies',
             order: '-sys.createdAt',
             limit,

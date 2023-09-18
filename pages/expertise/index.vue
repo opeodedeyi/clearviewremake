@@ -11,13 +11,7 @@
         ]
     });
 
-    const runtimeConfig = useRuntimeConfig();
-    import { createClient } from 'contentful';
-
-    const client = createClient({
-        space: runtimeConfig.public.theSpaceId,
-        accessToken: runtimeConfig.public.theAccessToken,
-    });
+    const { $contentfulClient } = useNuxtApp();
 
     const weSupportWith = ref([
         {id: 1, image: '/svg/aIIcon.svg', title: 'Audience Insight', content:"Want to better understand a community or a group of people you do not know too well? We can help you do just that!"},
@@ -44,7 +38,7 @@
     const showPopup = ref(false);
     
     async function getAllTeamMembers(limit = 200, skip = 0) {
-        const response = await client.getEntries({
+        const response = await $contentfulClient.getEntries({
             content_type: 'team',
             order: 'fields.id',
             limit,
