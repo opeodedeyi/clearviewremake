@@ -129,7 +129,7 @@
             },
             {
                 hid: 'twitter:image',
-                name: 'twitter:image',
+                property: 'twitter:image',
                 content: projectDetails.value[0].featuredImage,
             },
         ],

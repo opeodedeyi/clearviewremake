@@ -130,7 +130,7 @@
             },
             {
                 hid: 'twitter:image',
-                name: 'twitter:image',
+                property: 'twitter:image',
                 content: blogDetails.value[0].featuredImage,
             },
         ],
