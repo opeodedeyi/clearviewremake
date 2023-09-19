@@ -164,7 +164,7 @@
     }
 
     async function getPdf(slug) {
-        const response = await client.getEntries({
+        const response = await $contentfulClient.getEntries({
             content_type: 'blog',
             'fields.slug': slug
         });

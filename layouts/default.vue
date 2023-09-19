@@ -1,45 +1,44 @@
 <script setup>
   import { ref, onMounted } from 'vue';
-  // import { useCookie } from '@vueuse/core';
+  const popupDecidion = useCookie("popupDecidion") // can be ("undecided", "decided")
+  const allowAnalytics = useCookie("allowAnalytics") // can be (true, false)
+  const { gtag, grantConsent, revokeConsent } = useGtag()
 
   const menuTrigger = ref(0);
-  const showCookieWarning = ref(false);
+  const showCookiePopup = ref(false);
 
-  // const showCookieWarningCookie = useCookie('showCookieWarning');
-  // const disableAnalyticsCookie = useCookie('disableAnalytics');
+  if (!popupDecidion.value) popupDecidion.value = "undecided"
+  if (!allowAnalytics.value) allowAnalytics.value = false
 
   const showMenu = () => {
     menuTrigger.value++;
   }
 
-  // const getCookies = () => {
-  //   if (showCookieWarningCookie.value) {
-  //     showCookieWarning.value = false;
-  //   } else {
-  //     showCookieWarning.value = true;
-  //   }
-  // }
+  const getCookies = () => {
+    if (popupDecidion.value === "undecided") {
+      showCookiePopup.value = true;
+    } else {
+      showCookiePopup.value = false;
+    }
+  }
 
-  // const setCookies = () => {
-  //   showCookieWarningCookie.value = true;
-  //   disableAnalyticsCookie.value = false;
-  // }
+  const acceptAnalyticsCookie = () => {
+    popupDecidion.value = "decided";
+    showCookiePopup.value = false;
+    allowAnalytics.value = true;
+    grantConsent();
+  }
 
-  // const acceptAnalyticsCookie = () => {
-  //   disableAnalyticsCookie.value = false;
-  //   showCookieWarningCookie.value = false;
-  //   showCookieWarning.value = false;
-  // }
+  const rejectAnalyticsCookie = () => {
+    popupDecidion.value = "decided";
+    showCookiePopup.value = false;
+    allowAnalytics.value = false;
+    revokeConsent();
+  }
 
-  // const rejectAnalyticsCookie = () => {
-  //   disableAnalyticsCookie.value = true;
-  //   showCookieWarningCookie.value = false;
-  //   showCookieWarning.value = false;
-  // }
-
-  // onMounted(() => {
-  //   getCookies();
-  // });
+  onMounted(() => {
+    getCookies();
+  });
 </script>
 
 <template>
@@ -47,6 +46,6 @@
     <HeaderMain :menuTrigger="menuTrigger" />
     <slot />
     <FooterMain @show-menu="showMenu()"/>
-    <UtilityCookiePopup v-if="showCookieWarning" @close-popup="showCookieWarning=false" @accept-analytics-cookie="acceptAnalyticsCookie" @reject-analytics-cookie="rejectAnalyticsCookie"/>
+    <UtilityCookiePopup v-if="showCookiePopup" @close-popup="showCookiePopup=false" @accept-analytics-cookie="acceptAnalyticsCookie" @reject-analytics-cookie="rejectAnalyticsCookie"/>
   </div>
 </template>

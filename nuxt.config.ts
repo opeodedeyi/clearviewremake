@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   modules: [
     'nuxt-gtag',
     '@nuxt/image',
+    'nuxt-simple-sitemap',
   ],
 
   image: {
@@ -15,7 +16,8 @@ export default defineNuxtConfig({
   },
 
   gtag: {
-    id: 'G-XXXXXXXXXX'
+    id: import.meta.env.GOOGLE_ANALYTICS_ID,
+    initialConsent: false
   },
   
   devtools: { enabled: true },
@@ -24,9 +26,6 @@ export default defineNuxtConfig({
     public: {
       theSpaceId: import.meta.env.YOUR_SPACE_ID,
       theAccessToken: import.meta.env.CONTENT_DELIVERY_API_ACCESS_TOKEN,
-      // googleAnalytics: {
-      //   id: import.meta.env.GOOGLE_ANALYTICS_ID
-      // }
     }
   }
 })
