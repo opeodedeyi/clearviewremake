@@ -14,7 +14,7 @@
     });
 
     const projects = ref(null);
-    const limit = ref(10);
+    const limit = ref(30);
     const page = ref(1);
     const total = ref(null);
     const loading = ref(false);
