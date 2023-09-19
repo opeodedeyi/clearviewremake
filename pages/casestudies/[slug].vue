@@ -115,7 +115,7 @@
             {
                 hid: 'twitter:url',
                 name: 'twitter:url',
-                content: `https://www.clearviewresearch.co.uk/${route.params.slug}`,
+                content: `https://www.clearviewresearch.co.uk/casestudies/${route.params.slug}`,
             },
             {
                 hid: 'twitter:title',

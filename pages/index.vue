@@ -7,6 +7,17 @@
     const caseScroll = ref(null)
     const testimonyNo = ref(1);
 
+    useHead({
+        title: 'Home / ClearView Research',
+        meta: [
+            {
+                hid: 'description',
+                name: 'description',
+                content: 'Giving minority audiences and those who often go unheard a voice, and providing organisations the opportunity to hear them',
+            }
+        ]
+    })
+
     const testimony = ref([
         {id: 1, image: '/images/dpfemale.png', name: 'Kate Goodman', role: 'Senior Campaigns Manager, Bite Back 2030', content:'CVR were great to work with, bringing unique and valuable insight to the team - which really helped steer our strategic direction on how to engage teenagers with the tricky topic of childhood obesity.'},
         {id: 2, image: '/images/dpmale.png', name: 'Jess Bool', role: 'Youth Strategy Lead, Unicef UK', content:'We worked with ClearView in Spring 2018 as part of our work to develop Unicef UK’s framework for youth engagement. Through a series of Solutions Labs and a bespoke digital tool that reached young people all over the UK, they prepared recommendations that have informed our work since.'},
