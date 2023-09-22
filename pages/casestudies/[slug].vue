@@ -111,7 +111,7 @@
 
     useSeoMeta({
         description: projectDetails.value[0].details,
-        ogDescription: projectDetails.value[0].details,
+        ogDescription: appendPresetHtml(projectDetails.value[0].details),
         ogTitle: projectDetails.value[0].title,
         ogImage: projectDetails.value[0].featuredImage,
         twitterCard: 'summary_large_image',
