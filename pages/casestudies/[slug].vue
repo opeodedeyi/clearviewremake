@@ -104,36 +104,18 @@
             {
                 hid: 'description',
                 name: 'description',
-                content: projectDetails.value[0].title  // route.params.slug.replace(/-/g, ' '),
-            },
-            // These are specific to Twitter
-            {
-                hid: 'twitter:card',
-                name: 'twitter:card',
-                content: 'summary_large_image', // This type of card shows a large image
-            },
-            {
-                hid: 'twitter:url',
-                name: 'twitter:url',
-                content: `https://www.clearviewresearch.co.uk/casestudies/${route.params.slug}`,
-            },
-            {
-                hid: 'twitter:title',
-                name: 'twitter:title',
-                content: projectDetails.value[0].title,
-            },
-            {
-                hid: 'twitter:description',
-                name: 'twitter:description',
-                content: projectDetails.value[0].title, // Change to your dynamic blog description
-            },
-            {
-                hid: 'twitter:image',
-                property: 'twitter:image',
-                content: projectDetails.value[0].featuredImage,
-            },
+                content: projectDetails.value[0].details  // route.params.slug.replace(/-/g, ' '),
+            }
         ],
     });
+
+    useSeoMeta({
+        description: projectDetails.value[0].details,
+        ogDescription: projectDetails.value[0].details,
+        ogTitle: projectDetails.value[0].title,
+        ogImage: projectDetails.value[0].featuredImage,
+        twitterCard: 'summary_large_image',
+    })
 
     async function getTwoProjects() {
         loading.value = true;

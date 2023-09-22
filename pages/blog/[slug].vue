@@ -105,43 +105,17 @@
             {
                 hid: 'description',
                 name: 'description',
-                content: blogDetails.value[0].title  // route.params.slug.replace(/-/g, ' '),
-            },
-            // These are specific to Twitter
-            // {
-            //     hid: 'twitter:card',
-            //     name: 'twitter:card',
-            //     content: 'summary_large_image', // This type of card shows a large image
-            // },
-            // {
-            //     hid: 'twitter:url',
-            //     name: 'twitter:url',
-            //     content: `https://www.clearviewresearch.co.uk/blog/${route.params.slug}`,
-            // },
-            // {
-            //     hid: 'twitter:title',
-            //     name: 'twitter:title',
-            //     content: blogDetails.value[0].title,
-            // },
-            // {
-            //     hid: 'twitter:description',
-            //     name: 'twitter:description',
-            //     content: blogDetails.value[0].details, // Change to your dynamic blog description
-            // },
-            // {
-            //     hid: 'twitter:image',
-            //     property: 'twitter:image',
-            //     content: blogDetails.value[0].featuredImage,
-            // },
+                content: blogDetails.value[0].details  // route.params.slug.replace(/-/g, ' '),
+            }
         ],
     });
 
     useSeoMeta({
-      description: blogDetails.value[0].details,
-      ogDescription: blogDetails.value[0].details,
-      ogTitle: blogDetails.value[0].title,
-      ogImage: blogDetails.value[0].featuredImage,
-      twitterCard: 'summary_large_image',
+        description: blogDetails.value[0].details,
+        ogDescription: blogDetails.value[0].details,
+        ogTitle: blogDetails.value[0].title,
+        ogImage: blogDetails.value[0].featuredImage,
+        twitterCard: 'summary_large_image',
     })
     
     async function getTwoBlogs(requestedLimit = limit.value, skip = 0) {

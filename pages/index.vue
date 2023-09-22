@@ -22,7 +22,7 @@
       description: 'Giving minority audiences and those who often go unheard a voice, and providing organisations the opportunity to hear them',
       ogDescription: 'Giving minority audiences and those who often go unheard a voice, and providing organisations the opportunity to hear them',
       ogTitle: 'Home / ClearView Research',
-      ogImage: '/images/favicon.png',
+      ogImage: 'https://www.clearviewresearch.co.uk/images/favicon.png',
       twitterCard: 'summary_large_image',
     })
 
