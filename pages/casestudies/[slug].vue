@@ -100,17 +100,17 @@
 
     useHead({
         title: projectDetails.value[0].title, // 'Blog / ClearView Research',
-        meta: [
-            {
-                hid: 'description',
-                name: 'description',
-                content: projectDetails.value[0].details  // route.params.slug.replace(/-/g, ' '),
-            }
-        ],
+        // meta: [
+        //     {
+        //         hid: 'description',
+        //         name: 'description',
+        //         content: projectDetails.value[0].details  // route.params.slug.replace(/-/g, ' '),
+        //     }
+        // ],
     });
 
     useSeoMeta({
-        description: projectDetails.value[0].details,
+        // description: projectDetails.value[0].details,
         // ogDescription: projectDetails.value[0].details,
         ogTitle: projectDetails.value[0].title,
         ogImage: projectDetails.value[0].featuredImage,
