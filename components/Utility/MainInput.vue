@@ -1,3 +1,34 @@
+<script>
+export default {
+    emits: ['update:modelValue'],
+    props: {
+        name: {
+            type: String,
+            required: true
+        },
+        placeholder: {
+            type: String,
+            required: false,
+            default: "text goes here"
+        },
+        inputType: {
+            type: String,
+            required: false,
+            default: "text"
+        },
+        controlType: {
+            type: String,
+            required: false,
+            default: 'input'
+        },
+        modelValue: {
+            type: String,
+            default: ''
+        }
+    }
+}
+</script>
+
 <template>
     <div class="normal-form">
         <label :for="name" class="label">
@@ -10,28 +41,28 @@
             type="text" 
             maxlength="50"
             :name="name" 
-            :value="value" 
-            @input="$emit('input', $event.target.value) ">
+            :value="modelValue" 
+            @input="$emit('update:modelValue', $event.target.value)">
         <!-- email input -->
         <input 
             v-if="controlType === 'input' && inputType ==='email'" 
             type="email" 
             :name="name" 
-            :value="value" 
-            @input="$emit('input', $event.target.value) ">
+            :value="modelValue" 
+            @input="$emit('update:modelValue', $event.target.value)">
         <!-- textarea input -->
         <div class="textarea" v-if="controlType === 'textarea'">
             <textarea  
                 :name="name" 
-                :value="value"
-                @input="$emit('input', $event.target.value) ">
+                :value="modelValue"
+                @input="$emit('update:modelValue', $event.target.value)">
             </textarea>
         </div>
     </div>
 </template>
 
 
-<script>
+<!-- <script>
 export default {
     props: {
         name: {
@@ -59,7 +90,7 @@ export default {
         }
     },
 }
-</script>
+</script> -->
 
 <style scoped>
 .label {

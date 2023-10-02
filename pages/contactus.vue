@@ -1,5 +1,6 @@
 <script setup>
     import { ref } from 'vue';
+    const formElement = ref(null);
 
     useHead({
         title: 'Contact Us / ClearView Research',
@@ -28,7 +29,7 @@
         } else if (form.value.message.length < 3) {
             errorMessage.value = "please add some more context to the 'message'";
         } else {
-            console.log("submitted");
+            console.log(form.value);
             formSubmit();
         }
     };
@@ -53,7 +54,9 @@
                 <p class="gen-title">Whether you’d like to discuss a project or say hi, we always love to hear from you.</p>
                 <div class="gen-hl"></div>
                 <p v-if="errorMessage" class="contact-error">{{ errorMessage }}</p>
-                <form action="https://formsubmit.co/info@clearviewresearch.co.uk" method="POST" ref="form">
+                <form action="https://formsubmit.co/info@clearviewresearch.co.uk" method="POST" ref="formm">
+                    <input type="hidden" name="_next" value="https://www.clearviewresearch.co.uk/contactus" />
+                    <input type="hidden" name="_captcha" value="false" />
                     <UtilityMainInput name="Name" placeholder="Full Name" inputType="text" controlType="input" v-model="form.name"/>
                     <UtilityMainInput name="Subject" placeholder="Subject" inputType="text" controlType="input" v-model="form.subject"/>
                     <UtilityMainInput name="Email" placeholder="Email Address" inputType="email" controlType="input" v-model="form.email"/>
@@ -158,6 +161,11 @@
     flex-wrap: nowrap;
     justify-content: space-between;
     background-color: var(--color-company);
+}
+
+.contact-error {
+    color: var(--color-danger);
+    margin-bottom: 30px;
 }
 
 .contact-body-form {
