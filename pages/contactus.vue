@@ -25,7 +25,7 @@
             errorMessage.value = "please make sure your 'fullname', 'subject', and 'message' fields are filled";
         } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(form.value.email)) {
             errorMessage.value = "please fill in a valid 'email'";
-        } else if (form.value.message.length < 20) {
+        } else if (form.value.message.length < 3) {
             errorMessage.value = "please add some more context to the 'message'";
         } else {
             console.log("submitted");
