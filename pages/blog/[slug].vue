@@ -23,7 +23,8 @@
     const fetchData = async () => {
         const response = await $contentfulClient.getEntries({
             content_type: 'blog',
-            'fields.slug': route.params.slug
+            'fields.slug': route.params.slug,
+            include: 10
         });
 
         return response.items.map(item => {
@@ -70,16 +71,20 @@
                             </div>`;
                         } else {
                             return `<span class="color">
-                            <a href="${node.data.uri}">${next(node.content)}</a>
+                            <a href="${node.data.uri}" target="_blank">${next(node.content)}</a>
                             </span>`;
                         }
                     },
-                    [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
-                        return `<div class="content-img"><img
-                            src="https:${node.data.target.fields.file.url}"
-                            width='100%'
-                            alt="${node.data.target.fields.description}"
-                            /></div>`;
+                    [BLOCKS.EMBEDDED_ASSET]: (node) => {
+                        const { file, description } = node.data.target.fields;
+                        const { url } = file;
+                        const mimeType = file.contentType;
+
+                        if (mimeType.includes('image')) {
+                            return `<div class="content-img"><img src="https:${url}" width="100%" alt="${description || 'Image'}"/></div>`;
+                        } else {
+                            return `<a href="https:${url}" target="_blank" rel="noopener noreferrer">${description || 'View Report'}</a>`;
+                        }
                     },
                 },
             }
