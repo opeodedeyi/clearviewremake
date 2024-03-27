@@ -54,7 +54,7 @@
                 <p class="gen-title">Whether you’d like to discuss a project or say hi, we always love to hear from you.</p>
                 <div class="gen-hl"></div>
                 <p v-if="errorMessage" class="contact-error">{{ errorMessage }}</p>
-                <form action="https://formsubmit.co/info@clearviewresearch.co.uk" method="POST" ref="formm">
+                <form action="https://formsubmit.co/boyematthew@gmail.com" method="POST" ref="formm">
                     <input type="hidden" name="_next" value="https://www.clearviewresearch.co.uk/contactus" />
                     <input type="hidden" name="_captcha" value="true" />
                     <UtilityMainInput name="Name" placeholder="Full Name" inputType="text" controlType="input" v-model="form.name"/>
