@@ -42,7 +42,7 @@ function goTocasestudy() {
 <template>
     <div v-if="typeOf == 'default'" class="casestudy-card">
         <div class="casestudy-card-image">
-            <NuxtImg :src="featuredImage" format="webp" sizes="sm:300px md:400px lg:500px" alt="ima"/>
+            <NuxtImg :src="featuredImage" format="webp" quality="70" alt="ima"/>
         </div>
         <div class="casestudy-card-content">
             <p class="casestudy-card-content-title">{{title}}</p>
@@ -51,7 +51,7 @@ function goTocasestudy() {
     </div>
     <div v-else class="casestudy-card-fixed">
         <div class="casestudy-card-fixed-image">
-            <NuxtImg :src="featuredImage" format="webp" sizes="sm:300px md:400px lg:500px" alt="ima"/>
+            <NuxtImg :src="featuredImage" format="webp" quality="70" alt="ima"/>
         </div>
         <div class="casestudy-card-fixed-content">
             <p class="casestudy-card-fixed-content-title">{{ truncate(title, 23, '...') }}</p>

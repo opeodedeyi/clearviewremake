@@ -114,7 +114,7 @@
             <div class="team-cards">
                 <div class="member-card" v-for="(member, index) in team" :key="index">
                     <div class="member-picture">
-                        <NuxtImg :src="member.displayPicture" format="webp" sizes="sm:100px md:200px lg:300px" alt="ima" class="imgg"/>
+                        <NuxtImg :src="member.displayPicture" format="webp" sizes="sm:300px md:400px lg:600px" alt="ima" class="imgg"/>
                         <img src="@/assets/svg/plus.svg" alt="ima" class="plus" @click="showMember(index)"/>
                     </div>
                     <div class="member-content">

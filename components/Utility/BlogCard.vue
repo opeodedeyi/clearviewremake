@@ -47,7 +47,7 @@
 <template>
     <div class="blog-card">
         <div class="blog-card-image">
-            <NuxtImg :src="featuredImage" format="webp" sizes="sm:300px md:400px lg:500px" alt="ima"/>
+            <NuxtImg :src="featuredImage" format="webp" quality="70" alt="ima"/>
         </div>
         <div class="blog-card-content">
             <p class="blog-card-content-date">{{getCustomDate()}}</p>
