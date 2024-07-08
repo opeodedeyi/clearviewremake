@@ -42,35 +42,30 @@
 
     const formSubmit = async () => {
         isLoading.value = true;
+        errorMessage.value = null;
+        successMessage.value = null;
         
         try {
-            const token = await turnstile.value.execute();
+            const token = await new Promise((resolve) => {
+                turnstile.value.reset();
+                turnstile.value.execute().then(resolve);
+            });
 
-            if (token) {
-                // info@clearviewresearch.co.uk
-                const response = await axios.post('https://formsubmit.co/ajax/opeyemiodedeyi@gmail.com', {
-                    ...form.value,
-                    _captcha: true,
-                    _next: 'https://www.clearviewresearch.co.uk/contactus'
-                });
+            if (!token) {
+                throw new Error('Turnstile verification failed');
+            }
 
-                if (response.data.success) {
-                    if (response.data.captcha_url) {
-                        const captchaWindow = window.open(response.data.captcha_url, '_blank');
-                        if (captchaWindow) {
-                            successMessage.value = "Please complete the captcha in the new window to send your message.";
-                        } else {
-                            errorMessage.value = "Please allow pop-ups to complete the captcha and send your message.";
-                        }
-                    } else {
-                        successMessage.value = "Your message has been sent successfully!";
-                        form.value = { name: null, subject: null, email: null, message: null };
-                    }
-                } else {
-                    errorMessage.value = "There was an error sending your message. Please try again.";
-                }
+            const response = await axios.post('https://formsubmit.co/ajax/opeyemiodedeyi@gmail.com', {
+                ...form.value,
+                'cf-turnstile-response': token,
+                _next: 'https://www.clearviewresearch.co.uk/contactus'
+            });
+
+            if (response.data.success) {
+                successMessage.value = "Your message has been sent successfully!";
+                form.value = { name: null, subject: null, email: null, message: null };
             } else {
-                errorMessage.value = "Turnstile verification failed. Please try again.";
+                errorMessage.value = "There was an error sending your message. Please try again.";
             }
         } catch (error) {
             console.error('Error submitting form:', error);
