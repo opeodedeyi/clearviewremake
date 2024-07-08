@@ -46,15 +46,20 @@
         successMessage.value = null;
         
         try {
-            if (!turnstile) {
+            let token = turnstile.value.getResponse();
+            
+            if (!token) {
+                token = await new Promise((resolve) => {
+                    turnstile.value.execute().then(resolve);
+                });
+            }
+
+            if (!token) {
                 throw new Error('Turnstile verification failed');
             }
 
-            console.log('Turnstile token:', turnstile);
-
             const response = await axios.post('https://formsubmit.co/ajax/opeyemiodedeyi@gmail.com', {
                 ...form.value,
-                'cf-turnstile-response': token,
                 _next: 'https://www.clearviewresearch.co.uk/contactus'
             });
 
