@@ -1,6 +1,5 @@
 <script setup>
-    import { ref } from 'vue';
-    const formElement = ref(null);
+    import axios from 'axios';
 
     useHead({
         title: 'Contact Us / ClearView Research',
@@ -14,6 +13,9 @@
     })
 
     const errorMessage = ref(null);
+    const successMessage = ref(null);
+    const isLoading = ref(false);
+    const turnstile = ref(null)
     const form = ref({
         name: null,
         subject: null,
@@ -21,22 +23,58 @@
         message: null
     });
 
-    const submitForm = () => {
+    const submitForm = async () => {
+        errorMessage.value = null;
+        successMessage.value = null;
+
         if (!form.value.name || !form.value.subject || !form.value.message) {
-            errorMessage.value = "please make sure your 'fullname', 'subject', and 'message' fields are filled";
+            errorMessage.value = "Please make sure your 'fullname', 'subject', and 'message' fields are filled";
         } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(form.value.email)) {
-            errorMessage.value = "please fill in a valid 'email'";
+            errorMessage.value = "Please fill in a valid 'email'";
         } else if (form.value.message.length < 3) {
-            errorMessage.value = "please add some more context to the 'message'";
+            errorMessage.value = "Please add some more context to the 'message'";
         } else {
-            console.log(form.value);
-            formSubmit();
+            await formSubmit();
         }
     };
 
-    const formSubmit = () => {
-        const formElement = document.querySelector('form');
-        formElement.submit();
+    const formSubmit = async () => {
+        isLoading.value = true;
+        
+        try {
+            const token = await turnstile.value.execute();
+
+            if (token) {
+                const response = await axios.post('https://formsubmit.co/ajax/info@clearviewresearch.co.uk', {
+                    ...form.value,
+                    _captcha: true,
+                    _next: 'https://www.clearviewresearch.co.uk/contactus'
+                });
+
+                if (response.data.success) {
+                    if (response.data.captcha_url) {
+                        const captchaWindow = window.open(response.data.captcha_url, '_blank');
+                        if (captchaWindow) {
+                            successMessage.value = "Please complete the captcha in the new window to send your message.";
+                        } else {
+                            errorMessage.value = "Please allow pop-ups to complete the captcha and send your message.";
+                        }
+                    } else {
+                        successMessage.value = "Your message has been sent successfully!";
+                        form.value = { name: null, subject: null, email: null, message: null };
+                    }
+                } else {
+                    errorMessage.value = "There was an error sending your message. Please try again.";
+                }
+            } else {
+                errorMessage.value = "Turnstile verification failed. Please try again.";
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            errorMessage.value = "There was an error sending your message. Please try again later.";
+        } finally {
+            isLoading.value = false;
+        }
     };
 </script>
 
@@ -54,15 +92,18 @@
                 <p class="gen-title">Whether you’d like to discuss a project or say hi, we always love to hear from you.</p>
                 <div class="gen-hl"></div>
                 <p v-if="errorMessage" class="contact-error">{{ errorMessage }}</p>
-                <form action="https://formsubmit.co/info@clearviewresearch.co.uk" method="POST" ref="formm">
+                <form @submit.prevent="submitForm">
                     <input type="hidden" name="_next" value="https://www.clearviewresearch.co.uk/contactus" />
                     <input type="hidden" name="_captcha" value="true" />
                     <UtilityMainInput name="Name" placeholder="Full Name" inputType="text" controlType="input" v-model="form.name"/>
                     <UtilityMainInput name="Subject" placeholder="Subject" inputType="text" controlType="input" v-model="form.subject"/>
                     <UtilityMainInput name="Email" placeholder="Email Address" inputType="email" controlType="input" v-model="form.email"/>
                     <UtilityMainInput name="Message" placeholder="Tell us anything" inputType="textarea" controlType="textarea" v-model="form.message"/>
+                    <!-- <NuxtTurnstile ref="turnstile" /> -->
                     <div class="empty-height"></div>
-                    <UtilityButton type="btn" size="medium" :onClick="submitForm">Send Message</UtilityButton>
+                    <UtilityButton type="submit" size="medium" :disabled="isLoading">
+                        {{ isLoading ? 'Sending...' : 'Send Message' }}
+                    </UtilityButton>
                 </form>
             </div>
             <div class="contact-body-information">

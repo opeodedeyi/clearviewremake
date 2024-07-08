@@ -1,21 +1,18 @@
 <script setup>
-  import { ref, onMounted } from 'vue';
-  const popupDecidion = useCookie("popupDecidion") // can be ("undecided", "decided")
-  const allowAnalytics = useCookie("allowAnalytics") // can be (true, false)
-  const { gtag, grantConsent, revokeConsent } = useGtag()
+  const gtagPopupDecision = useCookie("gtagPopupDecision") // can be ("undecided", "decided")
+  const { gtag } = useGtag()
 
   const menuTrigger = ref(0);
   const showCookiePopup = ref(false);
 
-  if (!popupDecidion.value) popupDecidion.value = "undecided"
-  if (!allowAnalytics.value) allowAnalytics.value = false
+  if (!gtagPopupDecision.value) gtagPopupDecision.value = "undecided"
 
   const showMenu = () => {
     menuTrigger.value++;
   }
 
   const getCookies = () => {
-    if (popupDecidion.value === "undecided") {
+    if (gtagPopupDecision.value === "undecided") {
       showCookiePopup.value = true;
     } else {
       showCookiePopup.value = false;
@@ -23,17 +20,19 @@
   }
 
   const acceptAnalyticsCookie = () => {
-    popupDecidion.value = "decided";
+    gtagPopupDecision.value = "decided";
     showCookiePopup.value = false;
-    allowAnalytics.value = true;
-    grantConsent();
+    gtag('consent', 'update', {
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
+      ad_storage: 'granted',
+      analytics_storage: 'granted'
+    })
   }
 
   const rejectAnalyticsCookie = () => {
-    popupDecidion.value = "decided";
+    gtagPopupDecision.value = "decided";
     showCookiePopup.value = false;
-    allowAnalytics.value = false;
-    revokeConsent();
   }
 
   onMounted(() => {

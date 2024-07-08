@@ -1,5 +1,4 @@
 <script setup>
-    import { ref, onMounted } from 'vue';
     const router = useRouter();
     const { $contentfulClient } = useNuxtApp();
 
@@ -340,6 +339,7 @@
         </div>
         <div class="homepage-close-image"></div>
     </div>
+
 </template>
 
 <style scoped>

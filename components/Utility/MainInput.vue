@@ -55,8 +55,7 @@ export default {
             <textarea  
                 :name="name" 
                 :value="modelValue"
-                @input="$emit('update:modelValue', $event.target.value)">
-            </textarea>
+                @input="$emit('update:modelValue', $event.target.value)"></textarea>
         </div>
     </div>
 </template>

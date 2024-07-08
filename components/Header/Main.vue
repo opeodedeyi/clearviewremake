@@ -1,23 +1,18 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
-// Props
 const props = defineProps({
   menuTrigger: {
     type: Number
   }
 })
 
-// Data
 const ses = ref(false)
 const showMenuBar = ref(false)
-
-// Computed
+const isMounted = ref(false)
 const route = useRoute()
 const page = computed(() => route.name)
 
-// Watchers
 watch(route, () => {
   showMenuBar.value = false
 })
@@ -26,24 +21,21 @@ watch(() => props.menuTrigger, () => {
   showMenuBar.value = true;
 })
 
-// Methods
 const hideNav = () => {
   showMenuBar.value = false
 }
 
 const onScroll = () => {
+  if (!isMounted.value) return
   const currentScrollPosition = window.pageYOffset
   if (currentScrollPosition < 0) {
     return
   }
-  if (Math.abs(currentScrollPosition) > 5) {
-    ses.value = true
-    return
-  }
-  ses.value = false
+  ses.value = Math.abs(currentScrollPosition) > 5
 }
 
 onMounted(() => {
+  isMounted.value = true
   window.addEventListener('scroll', onScroll)
 })
 
@@ -53,24 +45,28 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <header class="header" :class="{ extraStyling: page != 'index' || ses }">
+  <header :class="['header', { 'extraStyling': isMounted && (page !== 'index' || ses) }]">
     <NuxtLink to="/" class="header-logo">
-      <img src="~/assets/svg/logo.svg" class="logo-color" alt="" />
+      <img src="~/assets/svg/logo.svg" class="logo-color" alt="Logo" />
     </NuxtLink>
-    <div class="header-content desk">
-      <ul class="header-content-links">
-        <li class="header-item"><NuxtLink to="/aboutus" class="plr-header">About Us</NuxtLink></li>
-        <li class="header-item"><NuxtLink to="/expertise" class="plr-header">Our Expertise</NuxtLink></li>
-        <li class="header-item"><NuxtLink to="/casestudies" class="plr-header">Case Studies</NuxtLink></li>
-        <li class="header-item"><NuxtLink to="/blog" class="plr-header">Blogs</NuxtLink></li>
-        <UtilityButton type="li" to="/contactus" size="header">Contact Us</UtilityButton>
-      </ul>
+    <ClientOnly>
+      <div class="header-content desk">
+        <ul class="header-content-links">
+          <li class="header-item"><NuxtLink to="/aboutus" class="plr-header">About Us</NuxtLink></li>
+          <li class="header-item"><NuxtLink to="/expertise" class="plr-header">Our Expertise</NuxtLink></li>
+          <li class="header-item"><NuxtLink to="/casestudies" class="plr-header">Case Studies</NuxtLink></li>
+          <li class="header-item"><NuxtLink to="/blog" class="plr-header">Blogs</NuxtLink></li>
+          <UtilityButton type="li" to="/contactus" size="header">Contact Us</UtilityButton>
+        </ul>
+      </div>
+    </ClientOnly>
+    <div v-if="isMounted" class="header-menu-bar mob" @click="showMenuBar = true">
+      <img src="~/assets/svg/menubar.svg" alt="Menu" />
     </div>
-    <div class="header-menu-bar mob" @click="showMenuBar = true">
-      <img src="~/assets/svg/menubar.svg" alt="+" />
-    </div>
-    <MobileNav @hide-nav="hideNav()" :isvisible="showMenuBar"/>
-    <MobileOverlay v-show="showMenuBar" @hide-nav="hideNav()"/>
+    <ClientOnly>
+      <MobileNav @hide-nav="hideNav()" :isvisible="showMenuBar"/>
+      <MobileOverlay v-show="showMenuBar" @hide-nav="hideNav()"/>
+    </ClientOnly>
   </header>
 </template>
 

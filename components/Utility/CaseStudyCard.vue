@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from 'vue';
 import { useShortenText } from '@/composables/useShortenText';
 import { useRouter } from 'vue-router';
 

@@ -1,5 +1,4 @@
 <script setup>
-    import { ref, onMounted } from 'vue';
     useHead({
         title: 'Our Expertise / ClearView Research',
         meta: [

@@ -1,5 +1,4 @@
 <script setup>
-    import { ref, onMounted } from 'vue';
     const { $contentfulClient } = useNuxtApp();
 
     useHead({
@@ -87,7 +86,7 @@
                 :title="result.title"
                 :date="result.createdAt" />
         </div>
-        <Loadingb v-if="loading"/>
+        <UtilityLoadingb v-if="loading"/>
         <div class="casestudies-loadmore" v-if="loading==false & limit*page<total & projects!=null"><UtilityButton type="button" size="medium" :onClick="loadMoreProjects">Load More Case Studies</UtilityButton></div>
     </div>
 </template>

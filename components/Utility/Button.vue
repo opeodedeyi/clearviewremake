@@ -7,6 +7,9 @@
     <nuxt-link v-else-if="type==='link'" :to="to" :class="size" class="btn">
         <slot/>
     </nuxt-link>
+    <button v-else-if="type==='submit'" :class="size" class="btn">
+        <slot/>
+    </button>
     <button v-else :class="size" class="btn" @click.prevent="onClick">
         <slot/>
     </button>
