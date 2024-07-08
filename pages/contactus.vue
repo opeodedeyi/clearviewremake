@@ -46,15 +46,7 @@
         successMessage.value = null;
         
         try {
-            let token = turnstile.value.getResponse();
-            
-            if (!token) {
-                token = await new Promise((resolve) => {
-                    turnstile.value.execute().then(resolve);
-                });
-            }
-
-            if (!token) {
+            if (!turnstile) {
                 throw new Error('Turnstile verification failed');
             }
 
