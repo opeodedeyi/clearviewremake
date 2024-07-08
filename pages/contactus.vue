@@ -46,10 +46,13 @@
         successMessage.value = null;
         
         try {
-            const token = await new Promise((resolve) => {
-                turnstile.value.reset();
-                turnstile.value.execute().then(resolve);
-            });
+            let token = turnstile.value.getResponse();
+            
+            if (!token) {
+                token = await new Promise((resolve) => {
+                    turnstile.value.execute().then(resolve);
+                });
+            }
 
             if (!token) {
                 throw new Error('Turnstile verification failed');
@@ -64,6 +67,7 @@
             if (response.data.success) {
                 successMessage.value = "Your message has been sent successfully!";
                 form.value = { name: null, subject: null, email: null, message: null };
+                turnstile.value.reset();
             } else {
                 errorMessage.value = "There was an error sending your message. Please try again.";
             }
@@ -98,7 +102,10 @@
                     <UtilityMainInput name="Email" placeholder="Email Address" inputType="email" controlType="input" v-model="form.email"/>
                     <UtilityMainInput name="Message" placeholder="Tell us anything" inputType="textarea" controlType="textarea" v-model="form.message"/>
                     <ClientOnly>
-                        <NuxtTurnstile ref="turnstile" :sitekey="turnstileSiteKey" />
+                        <NuxtTurnstile 
+                            ref="turnstile" 
+                            :sitekey="turnstileSiteKey"
+                            :options="{ execution: 'execute' }" />
                     </ClientOnly>
                     <div class="empty-height"></div>
                     <UtilityButton type="submit" size="medium" :disabled="isLoading">
