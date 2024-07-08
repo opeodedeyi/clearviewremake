@@ -104,8 +104,7 @@
                     <ClientOnly>
                         <NuxtTurnstile 
                             ref="turnstile" 
-                            :sitekey="turnstileSiteKey"
-                            :options="{ execution: 'execute' }" />
+                            :sitekey="turnstileSiteKey" />
                     </ClientOnly>
                     <div class="empty-height"></div>
                     <UtilityButton type="submit" size="medium" :disabled="isLoading">
