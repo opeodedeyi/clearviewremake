@@ -12,6 +12,8 @@
         ]
     })
 
+    const config = useRuntimeConfig()
+    const turnstileSiteKey = ref(config.public.turnstileSiteKey)
     const errorMessage = ref(null);
     const successMessage = ref(null);
     const isLoading = ref(false);
@@ -100,7 +102,7 @@
                     <UtilityMainInput name="Subject" placeholder="Subject" inputType="text" controlType="input" v-model="form.subject"/>
                     <UtilityMainInput name="Email" placeholder="Email Address" inputType="email" controlType="input" v-model="form.email"/>
                     <UtilityMainInput name="Message" placeholder="Tell us anything" inputType="textarea" controlType="textarea" v-model="form.message"/>
-                    <NuxtTurnstile ref="turnstile" />
+                    <NuxtTurnstile ref="turnstile" :sitekey="turnstileSiteKey" />
                     <div class="empty-height"></div>
                     <UtilityButton type="submit" size="medium" :disabled="isLoading">
                         {{ isLoading ? 'Sending...' : 'Send Message' }}

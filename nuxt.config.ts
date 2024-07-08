@@ -10,7 +10,12 @@ export default defineNuxtConfig({
     '@/assets/styles/main.css',
   ],
 
-  modules: ['nuxt-gtag', '@nuxt/image', "@nuxtjs/sitemap", "@nuxtjs/turnstile"],
+  modules: [
+    'nuxt-gtag',
+    '@nuxt/image',
+    "@nuxtjs/sitemap",
+    "@nuxtjs/turnstile",
+  ],
 
   image: {
     provider: 'contentful',
@@ -34,6 +39,11 @@ export default defineNuxtConfig({
   },
 
   devtools: { enabled: true },
+
+  turnstile: {
+    siteKey: import.meta.env.TURNSTILE_SITE_KEY,
+    addValidateEndpoint: true
+  },
 
   runtimeConfig: {
     public: {
