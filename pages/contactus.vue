@@ -50,7 +50,7 @@
                 throw new Error('Turnstile verification failed');
             }
 
-            const response = await axios.post('https://formsubmit.co/ajax/opeyemiodedeyi@gmail.com', {
+            const response = await axios.post('https://formsubmit.co/ajax/info@clearviewresearch.co.uk', {
                 ...form.value,
                 _next: 'https://www.clearviewresearch.co.uk/contactus'
             });
