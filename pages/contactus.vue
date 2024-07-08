@@ -97,7 +97,9 @@
                     <UtilityMainInput name="Subject" placeholder="Subject" inputType="text" controlType="input" v-model="form.subject"/>
                     <UtilityMainInput name="Email" placeholder="Email Address" inputType="email" controlType="input" v-model="form.email"/>
                     <UtilityMainInput name="Message" placeholder="Tell us anything" inputType="textarea" controlType="textarea" v-model="form.message"/>
-                    <NuxtTurnstile ref="turnstile" :sitekey="turnstileSiteKey" />
+                    <ClientOnly>
+                        <NuxtTurnstile ref="turnstile" :sitekey="turnstileSiteKey" />
+                    </ClientOnly>
                     <div class="empty-height"></div>
                     <UtilityButton type="submit" size="medium" :disabled="isLoading">
                         {{ isLoading ? 'Sending...' : 'Send Message' }}
